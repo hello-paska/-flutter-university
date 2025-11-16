@@ -90,6 +90,9 @@ flutter:
 
   assets:
     - assets/images/img1.jpg
+    - assets/images/pizza1.jpg
+    - assets/images/pizza2.jpg
+    - assets/images/pizza3.jpg
 
   fonts:
     - family: SuisseIntl
