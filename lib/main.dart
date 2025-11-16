@@ -1,108 +1,106 @@
-// використання StatefulWidget і його життєвого циклу
-import 'dart:async';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyFirstApp());
+void main() {
+  runApp(MyApp());
+}
 
-class MyFirstApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Download Demo',
       debugShowCheckedModeBanner: false,
-      home: DownloadScreen(),
+      title: "Stateful Counter Widget",
+      theme: ThemeData(primarySwatch: Colors.amber),
+      home: Scaffold(
+        backgroundColor: Colors.amber[300],
+        appBar: AppBar(title: Text("Завдання 2")),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              HintLabel('Натисніть «-» для зменшення'),
+              SizedBox(height: 8.0),
+              CounterWidget(), // кастомний віджет
+              SizedBox(height: 8.0),
+              HintLabel('Натисніть «+» для збільшення'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
-class DownloadScreen extends StatefulWidget {
+// ----------------------------
+// Власний віджет HintLabel
+// ----------------------------
+class HintLabel extends StatelessWidget {
+  final String text;
+
+  const HintLabel(this.text);
+
   @override
-  _DownloadScreenState createState() => _DownloadScreenState();
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(color: Colors.amber[200]),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.grey[700]),
+        ),
+      ),
+    );
+  }
 }
 
-class _DownloadScreenState extends State<DownloadScreen> {
-  bool _isLoading = false;
-  double _progressValue = 0.0;
-  Timer? _timer;
-
+// ----------------------------
+// Власний кастомний CounterWidget
+// ----------------------------
+class CounterWidget extends StatefulWidget {
   @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+  _CounterWidgetState createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends State<CounterWidget> {
+  int _count = 0;
+
+  void _increment() {
+    setState(() {
+      _count++;
+    });
   }
 
-  void _startDownload() {
-    if (_isLoading) return;
-
+  void _decrement() {
     setState(() {
-      _isLoading = true;
-      _progressValue = 0.0;
-    });
-
-    const oneSec = Duration(milliseconds: 500);
-    _timer = Timer.periodic(oneSec, (Timer timer) {
-      setState(() {
-        _progressValue += 0.1; 
-
-        if (_progressValue >= 1.0) {
-          _progressValue = 1.0;
-          _isLoading = false;
-          timer.cancel();
-        }
-      });
+      _count--;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final percentText = '${(_progressValue * 100).round()}%';
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My First App'),
-        centerTitle: true,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.amber[600],
+        borderRadius: BorderRadius.circular(8.0),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: _isLoading
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    LinearProgressIndicator(value: _progressValue),
-                    const SizedBox(height: 16),
-                    Text(
-                      percentText,
-                      style: const TextStyle(
-                        color: Colors.blue,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Завантаження триває...',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                )
-              : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const <Widget>[
-                    Icon(Icons.cloud_download, size: 64, color: Colors.blue),
-                    SizedBox(height: 16),
-                    Text(
-                      'Натисніть кнопку, щоб почати завантаження',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ],
-                ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _startDownload,
-        child: const Icon(Icons.play_arrow),
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            onPressed: _decrement,
+            icon: Icon(Icons.remove),
+          ),
+          Text(
+            '$_count',
+            style: TextStyle(fontSize: 40),
+          ),
+          IconButton(
+            onPressed: _increment,
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
