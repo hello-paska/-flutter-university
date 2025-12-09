@@ -322,7 +322,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
       story: _storyController.text,
     );
 
-    // 2. Показуємо діалог "Registration successful"
+  
     await showDialog(
       context: context,
       builder: (ctx) {
@@ -340,7 +340,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(ctx).pop(); // закрити діалог
+                Navigator.of(ctx).pop(); 
               },
               child: const Text(
                 'Verified',
@@ -352,7 +352,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
       },
     );
 
-    // 3. Переходимо на екран UserInfoPage, передаючи user
+
     Navigator.push(
       context,
       MaterialPageRoute(

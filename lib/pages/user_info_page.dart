@@ -22,7 +22,6 @@ class UserInfoPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Верхній рядок: імʼя + країна
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
