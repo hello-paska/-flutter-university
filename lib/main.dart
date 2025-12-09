@@ -1,4 +1,3 @@
-// використання StatefulWidget і його життєвого циклу
 import 'dart:async';
 import 'package:flutter/material.dart';
 
