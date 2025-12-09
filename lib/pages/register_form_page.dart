@@ -68,7 +68,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  // ---------- Full Name ----------
+
 
   Widget _buildNameField() {
     return TextFormField(
@@ -101,7 +101,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  // ---------- Phone Number ----------
+
 
   Widget _buildPhoneField() {
     return TextFormField(
@@ -147,7 +147,6 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     return phoneExp.hasMatch(input);
   }
 
-  // ---------- Email ----------
 
   Widget _buildEmailField() {
     return TextFormField(
@@ -170,7 +169,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  // ---------- Country (Dropdown) ----------
+
 
   Widget _buildCountryDropdown() {
     final countries = ['Ukraine', 'Poland', 'Germany', 'USA', 'Other'];
@@ -204,7 +203,6 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  // ---------- Life Story ----------
 
   Widget _buildStoryField() {
     return TextFormField(
@@ -222,7 +220,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  // ---------- Password ----------
+
 
   Widget _buildPasswordField() {
     return TextFormField(
@@ -256,7 +254,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  // ---------- Confirm Password ----------
+
 
   Widget _buildConfirmPasswordField() {
     return TextFormField(
@@ -290,7 +288,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
     );
   }
 
-  // ---------- Button ----------
+
 
   Widget _buildRegisterButton() {
     return SizedBox(
@@ -313,7 +311,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
 
   void _submitForm() async {
   if (_formKey.currentState!.validate()) {
-    // 1. Створюємо об'єкт User з даних форми
+
     final user = User(
       name: _nameController.text,
       phone: _phoneController.text,
@@ -322,7 +320,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
       story: _storyController.text,
     );
 
-    // 2. Показуємо діалог "Registration successful"
+
     await showDialog(
       context: context,
       builder: (ctx) {
@@ -340,7 +338,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(ctx).pop(); // закрити діалог
+                Navigator.of(ctx).pop(); 
               },
               child: const Text(
                 'Verified',
@@ -352,7 +350,7 @@ class _RegisterFormPageState extends State<RegisterFormPage> {
       },
     );
 
-    // 3. Переходимо на екран UserInfoPage, передаючи user
+
     Navigator.push(
       context,
       MaterialPageRoute(
