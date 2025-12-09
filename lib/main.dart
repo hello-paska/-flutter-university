@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             children: [
               HintLabel('Натисніть «-» для зменшення'),
               SizedBox(height: 8.0),
-              CounterWidget(), // кастомний віджет
+              CounterWidget(), 
               SizedBox(height: 8.0),
               HintLabel('Натисніть «+» для збільшення'),
             ],
@@ -31,9 +31,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ----------------------------
-// Власний віджет HintLabel
-// ----------------------------
+
 class HintLabel extends StatelessWidget {
   final String text;
 
@@ -54,9 +52,7 @@ class HintLabel extends StatelessWidget {
   }
 }
 
-// ----------------------------
-// Власний кастомний CounterWidget
-// ----------------------------
+
 class CounterWidget extends StatefulWidget {
   @override
   _CounterWidgetState createState() => _CounterWidgetState();
