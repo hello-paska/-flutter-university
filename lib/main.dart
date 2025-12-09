@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'pizza.dart';
 import 'pizza_detail.dart';
 
-// Список піц з описом і рецептом
 final List<Pizza> listReceptionPizza = [
   Pizza(
     "Маргарита",
