@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// ===== МОДЕЛЬ ДЛЯ ПОСТА З КАРТИНКОЮ =====
 
 class PostItem {
   final int id;
@@ -20,13 +19,13 @@ class PostItem {
   });
 }
 
-// ===== ЗАВАНТАЖЕННЯ ПОСТІВ (текст із JSONPlaceholder + фото з picsum) =====
+
 
 Future<List<PostItem>> fetchPostItems({
   required int page,
   required int limit,
 }) async {
-  // текст беремо з JSONPlaceholder
+
   final postsUrl = Uri.parse(
       'https://jsonplaceholder.typicode.com/posts?_page=$page&_limit=$limit');
 
@@ -40,7 +39,7 @@ Future<List<PostItem>> fetchPostItems({
       final title = post['title'] as String;
       final body = post['body'] as String;
 
-      // картинки беремо з picsum.photos, прив'язуємо до id, щоб були стабільні
+      
       final imageUrl = 'https://picsum.photos/seed/post_$id/900/450';
       final thumbUrl = 'https://picsum.photos/seed/thumb_$id/80/80';
 
@@ -59,21 +58,18 @@ Future<List<PostItem>> fetchPostItems({
   }
 }
 
-// ===== ТОЧКА ВХОДУ =====
 
 void main() {
   runApp(const MyApp());
 }
 
-// ===== КОРЕНЕВИЙ ВІДЖЕТ =====
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const base = Color(0xFF0B1020); // темний, але не «мертвий» фон
-
+    const base = Color(0xFF0B1020); 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Posts Demo',
@@ -93,7 +89,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ===== ЕКРАН ЗІ СПИСКОМ ПОСТІВ (ТЕМА, КАРТИНКИ, ПАГІНАЦІЯ) =====
 
 class PostsScreen extends StatefulWidget {
   const PostsScreen({super.key});
@@ -230,7 +225,7 @@ class _PostsScreenState extends State<PostsScreen> {
     return RefreshIndicator(
       onRefresh: _refresh,
       child: ListView.separated(
-        itemCount: _items.length + 1, // +1 для блоку пагінації
+        itemCount: _items.length + 1, 
         separatorBuilder: (_, __) => const SizedBox(height: 16),
         itemBuilder: (context, index) {
           if (index < _items.length) {
@@ -238,7 +233,7 @@ class _PostsScreenState extends State<PostsScreen> {
             return _PostCard(item: item);
           }
 
-          // останній елемент – "завантажити ще" / "кінець"
+
           if (_hasMore) {
             return Center(
               child: Padding(
@@ -269,7 +264,6 @@ class _PostsScreenState extends State<PostsScreen> {
   }
 }
 
-// ===== КАРТКА ПОСТА =====
 
 class _PostCard extends StatelessWidget {
   final PostItem item;
@@ -289,12 +283,10 @@ class _PostCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
-          // тут можна додати перехід на екран деталей, якщо захочеш
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // верхнє зображення
             AspectRatio(
               aspectRatio: 16 / 9,
               child: Image.network(
@@ -309,13 +301,13 @@ class _PostCard extends StatelessWidget {
               ),
             ),
 
-            // контент
+
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // бейдж з id
+
                   Container(
                     width: 30,
                     height: 30,
@@ -335,7 +327,7 @@ class _PostCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
 
-                  // текст
+
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
